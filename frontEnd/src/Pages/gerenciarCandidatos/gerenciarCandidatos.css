@@ -1,0 +1,70 @@
+/* Estilo geral da página */
+.gerenciar-candidatos {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .gerenciar-candidatos h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Lista de candidatos */
+  .gerenciar-candidatos ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .gerenciar-candidatos li {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo dos títulos dentro da lista */
+  .gerenciar-candidatos li h3 {
+    font-size: 20px;
+    color: #2c3e50;
+    margin: 0 0 10px;
+  }
+  
+  /* Informações adicionais do candidato */
+  .gerenciar-candidatos li p {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  /* Botão de excluir */
+  .gerenciar-candidatos button {
+    padding: 10px 15px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .gerenciar-candidatos button:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Mensagem de erro */
+  .error {
+    color: #e74c3c;
+    font-size: 18px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* Alinhamento para quando a lista estiver vazia */
+  .gerenciar-candidatos p {
+    text-align: center;
+  }
+  
