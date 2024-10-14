@@ -147,7 +147,7 @@ function GerenciarVagasPage() {
             </li>
           ))
         ) : (
-          <p>Nenhuma vaga disponível.</p>
+          <p>Nenhuma vaga encontrada.</p>
         )}
       </ul>
 
