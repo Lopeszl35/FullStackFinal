@@ -1,0 +1,38 @@
+.navbar {
+    background-color: #333;
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  .navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .navbar ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  .navbar ul li a, .navbar ul li button {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  
+  .navbar ul li button:hover, .navbar ul li a:hover {
+    color: #ccc;
+  }
+  
+  .navbar ul li button {
+    font-size: 18px;
+  }
+  

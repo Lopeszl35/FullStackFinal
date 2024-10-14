@@ -1,0 +1,30 @@
+.admin-home {
+    text-align: center;
+    padding: 40px;
+  }
+  
+  .admin-home h1 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .menu-options {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .menu-link {
+    background-color: #007bff;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  
+  .menu-link:hover {
+    background-color: #0056b3;
+  }
+  

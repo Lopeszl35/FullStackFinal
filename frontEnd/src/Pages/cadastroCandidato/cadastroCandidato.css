@@ -1,0 +1,61 @@
+.cadastro-candidato {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .cadastro-candidato h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .cadastro-candidato form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cadastro-candidato label {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .cadastro-candidato input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .cadastro-candidato button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .cadastro-candidato button:hover {
+    background-color: #218838;
+  }
+  
+  .error-message {
+    color: #e74c3c;
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .success-message {
+    color: #28a745;
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
