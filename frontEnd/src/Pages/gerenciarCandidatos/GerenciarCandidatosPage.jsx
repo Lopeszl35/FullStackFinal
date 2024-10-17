@@ -6,21 +6,21 @@ function GerenciarCandidatosPage() {
   const [candidatos, setCandidatos] = useState([]);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    const fetchCandidatos = async () => {
-      try {
-        const data = await obterCandidatos();
-        if (Array.isArray(data)) {
-          setCandidatos(data); // Certifica-se de que é um array
-        } else {
-          setError('Erro ao carregar candidatos.');
-        }
-      } catch (error) {
+  const fetchCandidatos = async () => {
+    try {
+      const data = await obterCandidatos();
+      if (Array.isArray(data)) {
+        setCandidatos(data); 
+      } else {
         setError('Erro ao carregar candidatos.');
-        console.error(error);
       }
-    };
+    } catch (error) {
+      setError('Erro ao carregar candidatos.');
+      console.error(error);
+    }
+  };
 
+  useEffect(() => {
     fetchCandidatos();
   }, []);
 
@@ -29,9 +29,11 @@ function GerenciarCandidatosPage() {
     if (confirmed) {
       try {
         await excluirCandidato(cpf);
-        setCandidatos(candidatos.filter(candidato => candidato.cpf !== cpf));
+        fetchCandidatos();
       } catch (error) {
         console.error('Erro ao excluir candidato', error);
+        setError('Falha ao excluir candidato. Tente novamente.');
+        fetchCandidatos();
       }
     }
   };
@@ -43,7 +45,7 @@ function GerenciarCandidatosPage() {
       <ul>
         {candidatos.length > 0 ? (
           candidatos.map((candidato, index) => (
-            <li key={candidato.cand_cpf || index}> {/* Usar `index` como fallback se o CPF não estiver disponível */}
+            <li key={candidato.cand_cpf || index}> 
               <h3>{candidato.cand_nome}</h3>
               <p>CPF: {candidato.cand_cpf}</p>
               <p>Endereço: {candidato.cand_endereco}</p>

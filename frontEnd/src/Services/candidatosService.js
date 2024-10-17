@@ -52,7 +52,7 @@ export const excluirCandidato = async (cpf) => {
         'Content-Type': 'application/json'
       }
     });
-
+  
     if (response.status === 403) {
       throw new Error('Acesso negado. Você não tem permissão para acessar esta página.');
     }
@@ -64,15 +64,17 @@ export const excluirCandidato = async (cpf) => {
   }
 };
 
-export const candidatarVaga = async (cpf, vagaCodigo) => {
+export const candidatarVaga = async (candidatado, vagaCodigo) => {
     try {
       const response = await fetch(`${API_URL}/candidato/vaga`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ cpf, vagaCodigo }),
+        body: JSON.stringify({ candidatado, vagaCodigo }),
       });
+      console.log(candidatado, vagaCodigo);
+      console.log('Response:', response);
       const data = await response.json();
       return data;
     } catch (error) {

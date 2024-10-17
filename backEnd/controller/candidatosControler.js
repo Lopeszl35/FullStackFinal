@@ -1,10 +1,12 @@
 import { validationResult } from 'express-validator';
 import CandidatosModel from '../model/entities/candidatosModel.js';
+import Database from '../model/dataBase.js';
 
+const database = new Database();
 const candidatosModel = new CandidatosModel();
 
 class CandidatosController {
-    // Adicionar candidato
+    /*
     async adicionarCandidato(req, res) {
         const errors = validationResult(req);
         console.log('Validação de erros:', JSON.stringify(errors));
@@ -29,15 +31,40 @@ class CandidatosController {
             console.error('Erro ao adicionar candidato:', error);
             res.status(500).json({ error: 'Erro ao adicionar candidato' });
         }
-    }
+    } */
 
     async candidatarVaga(req, res) {
-        const { cpf, vagaCodigo } = req.body;
-
+        const errors = validationResult(req);
+        console.log('Validação de erros:', JSON.stringify(errors));
+        const { cpf, nome, endereco, telefone, vagaCodigo } = req.body;
+        
+        if (!errors.isEmpty()) {
+            console.log('Erro na validação ao adicionar candidato:', errors.array());
+            return res.status(400).json({ errors: errors.array() });
+        }
+        let connection = await database.beginTransaction();
         try {
+            //Inicio tentando cadastrar candidato
+            console.log('Tentando adicionar candidato:', req.body);
+            const adicionandoCandidato = await candidatosModel.adicionarCandidato({
+                cpf,
+                nome,
+                endereco,
+                telefone
+            }, connection);
+            console.log('Resultado ao adicionar candidato:', adicionandoCandidato);
+            //Fim tentando cadastrar candidato
+
+            // Inicio tentando candidatar-se à vaga
             console.log('Tentando candidatar CPF:', cpf, 'para a vaga:', vagaCodigo);
-            const result = await candidatosModel.candidatarVaga(cpf, vagaCodigo);
-            console.log('Resultado ao candidatar-se à vaga:', result);
+            const candidatandoVaga = await candidatosModel.candidatarVaga(cpf, vagaCodigo, connection);
+            console.log(`Candidadato ${nome} candidatado com sucesso a vaga ${vagaCodigo}!`);
+            // Fim tentando candidatar-se à vaga
+
+            const result = {
+                adicionandoCandidato,
+                candidatandoVaga
+            };
             return res.status(201).json(result);
         } catch (error) {
             console.error('Erro ao candidatar-se à vaga:', error);
@@ -45,7 +72,6 @@ class CandidatosController {
         }
     }
 
-    // Obter todos os candidatos
     async obterTodosCandidatos(req, res) {
         try {
             console.log('Tentando obter todos os candidatos');

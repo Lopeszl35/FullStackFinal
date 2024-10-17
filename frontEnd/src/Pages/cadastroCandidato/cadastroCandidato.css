@@ -1,61 +1,68 @@
-.cadastro-candidato {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-  }
-  
-  .cadastro-candidato h2 {
-    text-align: center;
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .cadastro-candidato form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .cadastro-candidato label {
-    margin-bottom: 5px;
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .cadastro-candidato input {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .cadastro-candidato button {
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .cadastro-candidato button:hover {
-    background-color: #218838;
-  }
-  
-  .error-message {
-    color: #e74c3c;
-    font-size: 16px;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  
-  .success-message {
-    color: #28a745;
-    font-size: 16px;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  
+/* Estilos para o container geral da página */
+.cadastro-candidato-vagas {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Título principal */
+.cadastro-candidato-vagas h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilos gerais para o formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para os inputs e labels */
+form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+form input, form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+form button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para as mensagens de erro */
+.form-error {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Estilo para as mensagens de sucesso ou informação */
+.mensagem {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}

@@ -3,16 +3,13 @@ import DataBase from '../dataBase.js';
 const database = new DataBase();
 
 class CandidatosModel {
-    // Adicionar um novo candidato
-    async adicionarCandidato(candidato) {
-        const connection = await database.beginTransaction();
+    async adicionarCandidato(candidato, connection) {
         try {
-            // Verifica se o candidato já está cadastrado
             const [candidatoExiste] = await connection.query(`SELECT * FROM Candidato WHERE cand_cpf = ?`, [candidato.cpf]);
 
             if (candidatoExiste.length > 0) {
                 await database.rollbackTransaction(connection);
-                return { success: false, message: 'Candidato já cadastrado' };
+                return { success: false, message: 'Candidato já cadastrado', candCpf: candidato.cpf };
             }
 
             const insertCandidatoQuery = `
@@ -27,7 +24,7 @@ class CandidatosModel {
             ]);
 
             await database.commitTransaction(connection);
-            return { success: true, message: 'Candidato inserido com sucesso' };
+            return { success: true, message: 'Candidato inserido com sucesso', candCpf: candidato.cpf };
         } catch (error) {
             await database.rollbackTransaction(connection);
             throw error;
@@ -88,10 +85,8 @@ class CandidatosModel {
         }
     }
 
-    async candidatarVaga(candCpf, vagaCodigo) {
-        const connection = await database.beginTransaction();
+    async candidatarVaga(candCpf, vagaCodigo, connection) {
         try {
-            // Inserir na tabela de relacionamento Candidato_Vaga
             const insertCandidatoVagaQuery = `
                 INSERT INTO Candidato_Vaga (cand_cpf, vaga_codigo, data_inscricao, horario_inscricao)
                 VALUES (?, ?, CURDATE(), CURTIME());
@@ -99,7 +94,7 @@ class CandidatosModel {
             await connection.query(insertCandidatoVagaQuery, [candCpf, vagaCodigo]);
 
             await database.commitTransaction(connection);
-            return { success: true, message: 'Candidatura realizada com sucesso', candCpf };
+            return { success: true, message: `Candidatura realizada com sucesso para a vaga ${vagaCodigo}` };
         } catch (error) {
             await database.rollbackTransaction(connection);
             throw error;

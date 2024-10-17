@@ -15,8 +15,8 @@ router.post('/cadastro', usuariosControler.adicionarUsuario.bind(usuariosControl
 // Rota de login com autenticação para gerenciamento
 router.post('/login', usuariosControler.logarUsuario.bind(usuariosControler));
 
-// Rota para cadastro de candidato para poder se candidatar a uma vaga
-router.post('/candidatoCadastro', candidatosControler.adicionarCandidato.bind(candidatosControler));
+// Rota para candidatura de vaga
+router.post('/candidato/vaga', candidatosControler.candidatarVaga.bind(candidatosControler));
 
 //rota para obter todas as vagas
 router.get('/vagas', vagasControler.obterTodasVagas.bind(vagasControler));
