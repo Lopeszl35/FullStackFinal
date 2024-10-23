@@ -5,10 +5,10 @@ import './cadastroCandidato.css';
 
 function CadastroCandidatoPage() {
   const [candidato, setCandidato] = useState({
-    nome: '',
-    cpf: '',
-    endereco: '',
-    telefone: ''
+    cand_nome: '',
+    cand_cpf: '',
+    cand_endereco: '',
+    cand_telefone: ''
   });
   const [vagas, setVagas] = useState([]);
   const [vagaSelecionada, setVagaSelecionada] = useState('');
@@ -31,7 +31,7 @@ function CadastroCandidatoPage() {
     e.preventDefault();
 
     // Verificação de campos vazios
-    if (!candidato.nome || !candidato.cpf || !candidato.endereco || !candidato.telefone || !vagaSelecionada) {
+    if (!candidato.cand_nome || !candidato.cand_cpf || !candidato.cand_endereco || !candidato.cand_telefone || !vagaSelecionada) {
       setFormError('Todos os campos e a seleção da vaga são obrigatórios.');
       return;
     }
@@ -40,8 +40,15 @@ function CadastroCandidatoPage() {
         // Não precisa recriar o objeto candidato, pois ele já está definido no estado
         const candidatura = await candidatarVaga(candidato, vagaSelecionada);
         
-        if (candidatura.success) {
+        if (candidatura.adicionandoCandidato?.success && candidatura.candidatandoVaga?.success) {
           setMensagem('Candidato cadastrado e candidatura realizada com sucesso!');
+          setCandidato({
+            cand_nome: '',
+            cand_cpf: '',
+            cand_endereco: '',
+            cand_telefone: ''
+          });
+          setVagaSelecionada('');
         } else {
           setMensagem('Erro ao candidatar-se à vaga.');
         }
@@ -64,16 +71,16 @@ function CadastroCandidatoPage() {
       {mensagem && <p className="mensagem">{mensagem}</p>}
       <form onSubmit={handleSubmit}>
         <label>Nome:</label>
-        <input type="text" name="nome" value={candidato.nome} onChange={handleChange} />
+        <input type="text" name="cand_nome" value={candidato.cand_nome} onChange={handleChange} />
 
         <label>CPF:</label>
-        <input type="text" name="cpf" value={candidato.cpf} onChange={handleChange} />
+        <input type="text" name="cand_cpf" value={candidato.cand_cpf} onChange={handleChange} />
 
         <label>Endereço:</label>
-        <input type="text" name="endereco" value={candidato.endereco} onChange={handleChange} />
+        <input type="text" name="cand_endereco" value={candidato.cand_endereco} onChange={handleChange} />
 
         <label>Telefone:</label>
-        <input type="text" name="telefone" value={candidato.telefone} onChange={handleChange} />
+        <input type="text" name="cand_telefone" value={candidato.cand_telefone} onChange={handleChange} />
 
         <label>Selecione uma vaga:</label>
         <select value={vagaSelecionada} onChange={(e) => setVagaSelecionada(e.target.value)}>

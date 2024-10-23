@@ -65,13 +65,16 @@ class VagasModel {
     async excluirVaga(vaga_codigo) {
         const connection = await database.beginTransaction();
         try {
+            const deletaVagaCandidatosQuery = `DELETE FROM Candidato_Vaga WHERE vaga_codigo = ?`;
+            const [resultCandidatoVaga] = await connection.query(deletaVagaCandidatosQuery, [vaga_codigo]);
             const deleteVagaQuery = `DELETE FROM Vaga WHERE vaga_codigo = ?`;
-            const [result] = await connection.query(deleteVagaQuery, [vaga_codigo]);
+            const [resultVaga] = await connection.query(deleteVagaQuery, [vaga_codigo]);
 
-            await database.commitTransaction(connection);
-            if (result.affectedRows > 0) {
+            if (resultCandidatoVaga.affectedRows > 0 && resultVaga.affectedRows > 0) {
+                await database.commitTransaction(connection);
                 return { success: true, message: 'Vaga excluída com sucesso' };
             } else {
+                await database.rollbackTransaction(connection);
                 return { success: false, message: 'Vaga não encontrada' };
             }
         } catch (error) {
